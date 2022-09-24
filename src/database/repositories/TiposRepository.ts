@@ -32,4 +32,23 @@ export default class TiposRepository {
 
 		return tipoEditado;
 	}
+	async buscaTipoPorId(id: number): Promise<TipoResponseProps> {
+		const tipo = await db.tipo.findFirst({
+			where: { id: id },
+		});
+
+		return tipo;
+	}
+
+	async buscaTipos(): Promise<TipoResponseProps[]> {
+		const tipos = await db.tipo.findMany();
+
+		return tipos;
+	}
+
+	async excluiTipo(id: number): Promise<void> {
+		await db.tipo.delete({
+			where: { id: id },
+		});
+	}
 }
